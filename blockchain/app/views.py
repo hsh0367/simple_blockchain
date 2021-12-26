@@ -75,10 +75,17 @@ class NodeRegisterView(APIView):
         return Response(response)
 
 
-# class NodeResolveView(APIView):
-#     def get(self, request, format=None):
-#         """
-#         Return a list of all users.
-#         """
-#         usernames = [user.username for user in User.objects.all()]
-#         return Response(usernames)
+class NodeResolveView(APIView):
+    def get(self, request, format=None):
+        replaced = blockchain.resolve_conflicts()
+        if replaced:
+            response = {
+                "message": "Our chain replaced",
+                "new_chain": blockchain.chain,
+            }
+        else:
+            response = {
+                "messae": "Our chain is authoritative",
+                "chain": blockchain.chain,
+            }
+        return Response(response)

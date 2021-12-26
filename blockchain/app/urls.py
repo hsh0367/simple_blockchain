@@ -4,7 +4,7 @@ from app.views import (
     MineView,
     FullChainView,
     NodeRegisterView,
-    # NodeResolveView,
+    NodeResolveView,
 )
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
     path("mine", MineView.as_view(), name="mine"),
     path("chain", FullChainView.as_view(), name="full_chain"),
     path("nodes/register", NodeRegisterView.as_view(), name="nodes_register"),
-    # path("nodes/resolve", NodeResolveView.as_view(), name="nodes_resolve"),
+    path("nodes/resolve", NodeResolveView.as_view(), name="nodes_resolve"),
 ]

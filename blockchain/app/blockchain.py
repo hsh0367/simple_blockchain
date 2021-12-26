@@ -39,7 +39,7 @@ class Blockchain(object):
         current_index = 1
         while current_index < len(chain):
             block = chain[current_index]
-            if block['previous_hash'] != self.hash(last_block)
+            if block["previous_hash"] != self.hash(last_block):
                 return False
             last_block = block
             current_index += 1

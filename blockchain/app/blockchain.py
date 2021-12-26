@@ -1,4 +1,5 @@
 import json
+import requests
 from time import time
 from hashlib import sha256
 from urllib.parse import urlparse
@@ -44,6 +45,23 @@ class Blockchain(object):
             last_block = block
             current_index += 1
         return True
+
+    def resolve_conflicts(self):
+        neighbours = self.nodes
+        new_chain = None
+        max_length = len(self.chain)
+        for node in neighbours:
+            tmp_rul = f"http://{str(node)}/chain"
+            response = requests.get(tmp_rul)
+            if requests.status_codes == 200:
+                length = response.json()["length"]
+                chain = response.json()["chain"]
+                if length > max_length and self.valid_chain(chain):
+                    max_length = length
+            if new_chain:
+                self.chain = new_chain
+                return True
+        return False
 
     @staticmethod
     def hash(block):

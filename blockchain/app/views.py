@@ -62,13 +62,17 @@ class FullChainView(APIView):
         return Response(response)
 
 
-# class NodeRegisterView(APIView):
-#     def post(self, request):
-#         data = request.data
-#         nodes = data.get("node", None)
-#         for node in nodes:
-#             blockchain.res
-#         return Response(usenames)
+class NodeRegisterView(APIView):
+    def post(self, request):
+        data = request.data
+        nodes = data.get("node", None)
+        for node in nodes:
+            blockchain.register_node(node)
+        response = {
+            "message": "New nodes have been addend",
+            "total_nodes": list(blockchain.nodes),
+        }
+        return Response(response)
 
 
 # class NodeResolveView(APIView):

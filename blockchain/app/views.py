@@ -31,7 +31,7 @@ class MineView(APIView):
             "proof": block["proof"],
             "previous_hash": block["previous_hash"],
         }
-        print("test")
+        print("testtest")
         return Response(response)
 
 
